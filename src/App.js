@@ -9,6 +9,7 @@ import {
 
 import { Bubble } from 'react-chartjs-2';
 import faker from 'faker';
+import {App1} from './MultipleCharts'
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
 
@@ -44,5 +45,10 @@ export const data = {
 };
 
 export function App() {
-  return <Bubble options={options} data={data} />;
+  return (
+    <>
+      <Bubble options={options} data={data} />;
+      <App1 />
+    </>
+  )
 }

@@ -24,34 +24,11 @@ const data = {
     ],
 };
 
-const data1 = async function () {
-    const data2 = await getAquisitionsByYear();
-    const data3 = {
-        labels: data2.map(row => row.year),
-        datasets: [
-            {
-                type: 'bar',
-                label: "Acquisition by Year",
-                data: data2.map(row => row.count),
-            },
-        ],
-    };
-    return data3
-}
+
 
 export function Acquisitions() {
-    const newData = data1();
-    console.log(newData);
-    newData.then((m) => console.log(m));
-
-    newData.then(m => {
-        outsideData.labels = m.labels;
-        outsideData.datasets = m.datasets
-    })
     return (<>
         <Chart type='bar' data={data} />
-        <Chart type='bar' data={outsideData} />
-
     </>)
 
 }

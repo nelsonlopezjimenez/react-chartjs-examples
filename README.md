@@ -72,3 +72,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # 6.16.2023
 
 ## URL : https://react-chartjs-2.js.org/examples/bubble-chart, https://react-chartjs-2.js.org/examples/multitype-chart
+
+## commit 1c7714c3a89b9e
+1. from react-chartjs-2 examples to test data handling
+1. GOAL: refactor acquisitions from parcel to webpack configuration
+
+![bubble-multibar-onebar](image.png)

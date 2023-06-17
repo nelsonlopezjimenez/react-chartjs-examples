@@ -6,31 +6,9 @@ import { getAquisitionsByYear } from './api'
 
 ChartJS.register();
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+let outsideData = {};
 
-const data1 = async function () {
-    const data = await getAquisitionsByYear();
-    const obj = {
-        labels,
-        datasets: [
-            {
-                type: 'bar',
-                label: 'Bar Acq by Year',
-                data: {
-                    labels: data.map(row => row.year),
-                    datasets: [
-                        {
-                            label: 'Acquisitions by year',
-                            data: data.map(row => row.count)
-                        }
-                    ]
-                }
-            }
-        ]
-    }
-    // console.log(data);
-    return obj;
-}
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 const data = {
     labels,
@@ -46,37 +24,34 @@ const data = {
     ],
 };
 
-export function Acquisitions() {
-    return <Chart type='bar' data={data} />
+const data1 = async function () {
+    const data2 = await getAquisitionsByYear();
+    const data3 = {
+        labels: data2.map(row => row.year),
+        datasets: [
+            {
+                type: 'bar',
+                label: "Acquisition by Year",
+                data: data2.map(row => row.count),
+            },
+        ],
+    };
+    return data3
 }
 
-// (async function () {
-//     const data = await getAquisitionsByYear();
+export function Acquisitions() {
+    const newData = data1();
+    console.log(newData);
+    newData.then((m) => console.log(m));
 
-//     new Chart(
-//         document.getElementById('acquisitions'),
-//         {
-//             type: 'bar',
-//             options: {
-//                 animation: false,
-//                 plugins: {
-//                     legend: {
-//                         display: false
-//                     },
-//                     tooltip: {
-//                         enabled: false
-//                     }
-//                 }
-//             },
-//             data: {
-//                 labels: data.map(row => row.year),
-//                 datasets: [
-//                     {
-//                         label: 'Acquisitions by year',
-//                         data: data.map(row => row.count)
-//                     }
-//                 ]
-//             }
-//         }
-//     );
-// });
+    newData.then(m => {
+        outsideData.labels = m.labels;
+        outsideData.datasets = m.datasets
+    })
+    return (<>
+        <Chart type='bar' data={data} />
+        <Chart type='bar' data={outsideData} />
+
+    </>)
+
+}
